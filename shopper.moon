@@ -4,22 +4,25 @@ class Shopper
     @appliers = {}
     @subs = {}
   
-  apply: (store) =>
+  _apply: (store) =>
     @store = store
     for fn in *@subs
-      fn @store
+      fn @_copy @store
+  
+  _copy: (t) =>
+    {k, v for k, v in pairs t}
   
   add: (fn) =>
     table.insert(@appliers, fn)
   
   stock: (product) =>
     for fn in *@appliers
-      @apply fn(@store, product)
+      @_apply fn(@store, product)
   
   subscribe: (fn, value) =>
     table.insert(@subs, fn)
   
-  buy: (value) =>
-    @store[value]
+  buy: =>
+    @_copy @store
 
 {:Shopper}

@@ -1,20 +1,5 @@
-import Shopper from require "shopper"
-import cmbi from require "combine/combine"
+import shop from require "example/shop"
 import add_name, select_name from require "example/products"
-
--- Create shopper
-shopper = Shopper!
-
--- Create stocker
-name_stocker = (store, product) ->
-  if product.type == "ADD_NAME"
-    return cmbi store, {names: cmbi store.names, product.name}
-  else if product.type == "SELECT_NAME"
-    return cmbi store, {selected: product.name}
-  else
-    return store
-
-shopper\add name_stocker
 
 -- Add a subscriber
 nameAddSub = (store) ->
@@ -23,14 +8,14 @@ nameAddSub = (store) ->
     str = str .. name .. " "
   print str
 
-shopper\subscribe nameAddSub
+shop\subscribe nameAddSub
 
 -- Stock products
-shopper\stock add_name "Venny"
-shopper\stock add_name "Clove"
-shopper\stock add_name "Tasla"
+shop\stock add_name "John"
+shop\stock add_name "Jane"
+shop\stock add_name "Jack"
 
-shopper\stock select_name "Clove"
+shop\stock select_name "Jane"
 
 -- Buy the selected name
-print shopper\buy "selected"
+print "Selected: ", (shop\buy!).selected
