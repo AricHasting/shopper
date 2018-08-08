@@ -2,7 +2,7 @@
 
 Shopper is a lightweight state manager for Moonscript and Lapis. 
 
-It closely resembles [Redux](https://redux.js.org/) in how your code interacts with it.
+It closely resembles [Redux](https://redux.js.org/).
 
 ## Quick Start
 1. Download or clone this repository. 
